@@ -1,54 +1,25 @@
-﻿@using TravelTask.Areas.Admin.Models.Destinations
-@model DestinationsIndexViewModel
+﻿@using TravelTask.Areas.Admin.Models
+@using TravelTask.Areas.Admin.Models.Destinations
+@model PagedEntityModel<List<DestinationsItemViewModel>>
 
 
 <a asp-action="Create" class="btn btn-success">Create</a>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Price</th>
-            <th scope="col">Image</th>
-            <th scope="col" colspan="3">Actions</th>
-        </tr>
-    </thead>
 
-    <tbody>
+@section scripts
+{
+    <script type="text/javascript">
 
-        @foreach(var destination in Model.Destinations)
-        {
-            <tr style="background-color:@(destination.IsDeleted ? "red" : "white" )">
-                <th scope="row">@destination.Id</th>
-                <th scope="row">@destination.Name</th>
-                <th scope="row">@destination.Rating</th>
-                <th scope="row">@destination.Price</th>
-                <th scope="row">
-                    @if(!string.IsNullOrEmpty(destination.CoverImageUrl))
-                    {
-                        <img height="100" width="100"  src="~/destinationimages/@destination.CoverImageUrl" />
-                    }
-                    else
-                    {   
-                        <p>No image available</p>
-                    }
-                </th>
-                <th scope="row">
-                    @if(destination.IsDeleted)
-                    {
-                        <a asp-action="RevokeDelete" asp-route-id="@destination.Id" class="btn btn-primary">Revoke Delete</a>
-                    }
-                    else
-                    {
-                        <a asp-action="Delete" asp-route-id="@destination.Id" class="btn btn-danger">Delete</a>
-                    }
-                    
-                    <a asp-action="Update" asp-route-id="@destination.Id" class="btn btn-warning">Modify</a>
-                </th>
+        $("body").on("click", " #table-responsive #pagination a", function (ev) {
+            ev.preventDefault();
+            let url = $(this).attr('href');
+            alert(url)
+            fetch(url).then(a => a.text()).then(a => $("#table-responsive").html(a));
+        });
+    </script>
+}
 
-            </tr>
-        }
-    </tbody>
-</table>
+
+<div id="table-responsive" class="table-responsive">
+    <partial name="_PaginatedEntityTable" />
+</div>

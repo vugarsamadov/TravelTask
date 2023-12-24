@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TravelTask.Areas.Admin.Models;
 using TravelTask.Areas.Admin.Models.Destinations;
 using TravelTask.Entities;
 using TravelTask.Extensions;
@@ -20,22 +21,60 @@ namespace TravelTask.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> PaginatedIndex(int page=1,int per_page=3)
         {
             var model = new DestinationsIndexViewModel();
             
-            model.Destinations = await _dbContext.Destinations
-                .Select(d=>new DestinationsItemViewModel
+
+
+            var pmodel = new PagedEntityModel<List<DestinationsItemViewModel>>();
+            pmodel.Page = page;
+            pmodel.PageSize = per_page;
+            pmodel.PageCount = (int)Math.Ceiling((decimal)await _dbContext.Destinations.CountAsync() / per_page);
+            pmodel.Data  = await _dbContext.Destinations
+                .Skip((page-1)*per_page)
+                .Take(per_page)
+                .Select(d => new DestinationsItemViewModel
                 {
                     Id = d.Id,
                     Name = d.Name,
-                    Rating  = d.Rating,
+                    Rating = d.Rating,
                     Price = d.Price,
                     CoverImageUrl = d.CoverImageUrl,
                     IsDeleted = d.IsDeleted
                 }).ToListAsync();
 
-            return View(model);
+
+            return PartialView("_PaginatedEntityTable",pmodel);
+        }
+
+
+        public async Task<IActionResult> Index()
+        {
+            var model = new DestinationsIndexViewModel();
+
+            var page = 1;
+            var per_page = 3;
+
+            var pmodel = new PagedEntityModel<List<DestinationsItemViewModel>>();
+            pmodel.Page = page;
+            pmodel.PageSize = per_page;
+            pmodel.PageCount =(int) Math.Ceiling((decimal)await _dbContext.Destinations.CountAsync()/per_page);
+            pmodel.Data = await _dbContext.Destinations
+                .Skip((page - 1) * per_page)
+                .Take(per_page)
+                .Select(d => new DestinationsItemViewModel
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Rating = d.Rating,
+                    Price = d.Price,
+                    CoverImageUrl = d.CoverImageUrl,
+                    IsDeleted = d.IsDeleted
+                }).ToListAsync();
+
+
+            return View(pmodel);
         }
 
 
