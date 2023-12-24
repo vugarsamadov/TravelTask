@@ -1,0 +1,40 @@
+﻿@using TravelTask.Areas.Admin.Models.Destinations
+@model DestinaitonsCreateViewModel
+
+<partial name="_ValidationScriptsPartial" />
+
+<form asp-action="Create"  method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" placeholder="Name">
+        <span  class="text-danger" asp-validation-for="Name"></span>
+    </div>
+
+      <div class="form-group">
+        <label asp-for="Rating"></label>
+        <input asp-for="Rating" class="form-control">
+        <span class ="text-danger" asp-validation-for="Rating"></span>
+
+    </div>
+
+      <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control">
+        <span class="text-danger" asp-validation-for="Price"></span>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CoverImage"></label>
+        <input asp-for="CoverImage" class="form-control">
+        <span class="text-danger" asp-validation-for="CoverImage"></span>
+    </div>
+
+
+    <button class="btn btn-success" type="submit" >
+        Create
+    </button>
+
+</form>

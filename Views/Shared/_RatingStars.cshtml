@@ -1,0 +1,11 @@
+﻿@model int
+
+
+@foreach(var i in Enumerable.Range(1, Model))
+{
+    <span class="fa fa-star checked"></span>
+}
+@foreach (var i in Enumerable.Range(Model, 5 - Model))
+{
+    <span class="fa fa-star"></span>
+}

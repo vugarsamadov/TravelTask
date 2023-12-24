@@ -1,0 +1,405 @@
+﻿@using TravelTask.Models.Destinations
+
+      
+@model DestinationsIndexViewModel;
+
+<!--Slider Section Start-->
+<section class="slider-area position-relative" id="home">
+    <div class="slider-overlay">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-12 text-center text-area wow fadeInDown" data-wow-delay="1000ms">
+                    <h5 class="subheading">Let us search your</h5>
+                    <h2 class="heading">Dream Destination</h2>
+                    <p class="text">Lorem ipsum is simply dummy text of the printing and typesetting. Lorem<br> Ipsum has been the industry’s standard dummy.  Lorem Ipsum has been the<br> industry’s standard dummy.</p>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <!-- Container End -->
+    </div>
+    <div class="social-icons">
+        <ul class="slider-social wow fadeInRight" data-wow-delay="1000ms">
+            <li>
+                <a class="icon-hover wow" href="#.">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </li>
+            <li>
+                <a class="icon-hover" href="#.">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li>
+                <a class="icon-hover" href="#.">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </li>
+            <li>
+                <a class="icon-hover" href="#.">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="text-center slider-carousel owl-carousel owl-themes active">
+        <div class="item active"><img src="img/slider-img1.jpg" alt="slider-img"></div>
+        <div class="item"><img src="img/slider-img2.jpg" alt="slider-img"></div>
+        <div class="item"><img src="img/slider-img3.jpg" alt="slider-img"></div>
+        <div class="item"><img src="img/slider-img4.jpg" alt="slider-img"></div>
+        <div class="item"><img src="img/slider-img5.jpg" alt="slider-img"></div>
+        <!--             <div class="item active" style="background-image: url('img/slider-img1.jpg')"></div>
+                    <div class="item" style="background-image: url('img/slider-img2.jpg')"></div>
+                    <div class="item" style="background-image: url('img/slider-img3.jpg')"></div>
+                    <div class="item" style="background-image: url('img/slider-img4.jpg')"></div>
+                    <div class="item" style="background-image: url('img/slider-img5.jpg')"></div> -->
+    </div>
+</section>
+<!-- Slider Section End -->
+<!--Slider form start-->
+<div class="slider-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 wow fadeInUp" data-wow-delay="1000ms">
+                <form class="row contact-form rounded-pill link" id="form-data">
+                    <div class="col-12 col-lg-9 d-inline-block d-lg-flex align-items-center">
+                        <div class="form-group">
+                            <label for="datepicker"> <span class="fas fa-calendar-plus " aria-hidden="true"></span></label>
+                            <input type="text" name='datepicker' class="form-control" value="" id="datepicker"
+                                   required="" placeholder="Check In">
+                        </div>
+                        <div class="form-group ">
+                            <label for="datepickr"> <span class="fas fa-calendar-minus" aria-hidden="true"></span></label>
+                            <input type="text" name='datepickr' class="form-control" value="" id="datepickr"
+                                   required="" placeholder="Check Out">
+                        </div>
+                        <div class="form-group ">
+                            <label><i class="fa fa-user mr-2" aria-hidden="true"></i></label>
+                            <select id="inputStates" class="form-control">
+                                <option class="red">Adults</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-users mr-2" aria-hidden="true"></i></label>
+                            <select id="inputState" class="form-control">
+                                <option>Children</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker " aria-hidden="true"></i></label>
+                            <input type="text" name="Location" placeholder="Location" id="location" required="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 button-center">
+                        <a href="javascript:void(0);" class="btn button btn-rounded green-btn btn-hvr-grey">
+                            Search Destinations
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Slider form end-->
+<!-- Destination Section Start -->
+<section class="destination-section" id="destinations">
+    <div class="container">
+        <div class="row no-gutters row-1">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center wow fadeInDown" data-wow-delay="400ms">
+                <h2 class="heading">Explore Our <br><span>Luxuries Destinations</span></h2>
+                <p class="subheading">Lorem ipsum is simply dummy text </p>
+            </div>
+        </div>
+        <!-- Row-2 Start -->
+        <div class="row  row-2">
+            @foreach(var destination in Model.Destinations)
+            {
+                
+            <div class="col-lg-4 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
+                <a class="card" href="destinations.html">
+                    <img src="~/destinationimages/@destination.CoverImageUrl" alt="destination-img">
+                    <div class="card-body">
+                        <h5 class="card-title">@destination.Name<span>$@destination.Price</span></h5>
+                        <div class="card-text">
+                            <partial name="_RatingStars" model="destination.Rating"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            }
+
+            @* <div class="col-lg-4 col-md-12 col-sm-12 destination wow fadeInUp" data-wow-delay="400ms">
+                <a class="card" href="destinations.html">
+                    <img src="img/destination-2.jpg" alt="destination-img">
+                    <div class="card-body">
+                        <h5 class="card-title">London 120 <span>$2360</span></h5>
+                        <div class="card-text">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fas fa-star-half-alt half-checked"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 destination wow fadeInDown" data-wow-delay="400ms">
+                <a class="card" href="destinations.html">
+                    <img src="img/destination-3.jpg" alt="destination-img">
+                    <div class="card-body">
+                        <h5 class="card-title">Paris 529 <span>$4730</span></h5>
+                        <div class="card-text">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fas fa-star-half-alt half-checked"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- Row-3 Start -->
+        <div class="row row-3">
+            <div class="col-lg-4 col-md-12 col-sm-12 wow fadeInDown" data-wow-delay="400ms">
+                <a class="card" href="destinations.html">
+                    <img src="img/destination-4.jpg" alt="destination-img">
+                    <div class="card-body">
+                        <h5 class="card-title">Malan 103 <span>$5500</span></h5>
+                        <div class="card-text">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fas fa-star-half-alt half-checked"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
+                <a class="card" href="#.">
+                    <img src="img/destination-5.jpg" alt="destination-img">
+                    <div class="card-body">
+                        <h5 class="card-title">New York 143 <span>$2835</span></h5>
+                        <div class="card-text">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fas fa-star-half-alt half-checked"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 wow fadeInDown" data-wow-delay="400ms">
+                <a class="card" href="destinations.html">
+                    <img src="img/destination-6.jpg" alt="destination-img">
+                    <div class="card-body">
+                        <h5 class="card-title">Toronto 156 <span>$8000</span></h5>
+                        <div class="card-text">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fas fa-star-half-alt half-checked"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div> *@
+        <!-- Button Start -->
+        @* <div class="button-center wow fadeInUp" data-wow-delay="400ms">
+            <a class="btn button btn-rounded green-btn btn-hvr-blue " href="destinations.html">
+                View All Similar Destinations
+            </a>
+        </div> *@
+    </div>
+    <!-- Container End -->
+</section>
+<!-- Destination Section End -->
+<!-- Gallery Section Start -->
+<section class="gallery-section" id="gallery">
+    <div class=" text-center gallery-carousel owl-carousel owl-themes active">
+        <div class="item active">
+            <img src="img/gallery-1.jpg" alt="gallery-img">
+            <div class="container">
+                <div class="detail-box">
+                    <div class="text-box wow fadeIn" data-wow-delay="400ms">
+                        <p class="subheading"><span></span>Beautiful Room</p>
+                        <h2 class="heading">A beautiful luxuries <br> Hotel Room in centre of new York</h2>
+                        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere nisi est, sed ullamcorper nibh volutpat at. In rutrum, metus ut posuere gravida, tellus lacus faucibus lectus, sed cursus eros ligula non odio. Suspendisse volutpat sagittis sapien. Curabitur quis malesuada ipsum.</p>
+                        <div class="button-center">
+                            <a class="btn button btn-rounded green-btn btn-hvr-blue scroll" href="#contact">
+                                Book Room Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="img/gallery-2.jpg" alt="gallery-img">
+            <div class="container">
+                <div class="detail-box">
+                    <div class="text-box">
+                        <p class="subheading"><span></span>Beautiful Room</p>
+                        <h2 class="heading">A beautiful luxuries <br> Hotel Room in centre of new York</h2>
+                        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere nisi est, sed ullamcorper nibh volutpat at. In rutrum, metus ut posuere gravida, tellus lacus faucibus lectus, sed cursus eros ligula non odio. Suspendisse volutpat sagittis sapien. Curabitur quis malesuada ipsum.</p>
+                        <div class="button-center">
+                            <a class="btn button btn-rounded green-btn btn-hvr-blue scroll" href="#contact">
+                                Book Room Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="img/gallery-3.jpg" alt="gallery-img">
+            <div class="container">
+                <div class="detail-box">
+                    <div class="text-box">
+                        <p class="subheading"><span></span>Beautiful Room</p>
+                        <h2 class="heading">A beautiful luxuries <br> Hotel Room in centre of new York</h2>
+                        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere nisi est, sed ullamcorper nibh volutpat at. In rutrum, metus ut posuere gravida, tellus lacus faucibus lectus, sed cursus eros ligula non odio. Suspendisse volutpat sagittis sapien. Curabitur quis malesuada ipsum.</p>
+                        <div class="button-center">
+                            <a class="btn button btn-rounded green-btn btn-hvr-blue scroll" href="#contact">
+                                Book Room Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+    <div class="icons d-flex ">
+        <i class="lni lni-chevron-left customPrevBtn"></i>
+        <i class="lni lni-chevron-right customNextBtn"></i>
+    </div>
+</section>
+<!-- Gallery Section End -->
+<!-- Counter section Start -->
+<section class="counter-section">
+    <div class="container">
+        <!-- Row-1 Start -->
+        <div class="row no-gutters row-1">
+            <div class="col-lg-7 col-md-12 col-sm-12 text-column wow fadeInLeft" data-wow-delay="400ms">
+                <p class="subheading">Let us show you some stats</p>
+                <h2 class="heading">beautiful luxuries <br> Destinations All over the world</h2>
+                <p class="text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected .</p>
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 img-column wow fadeInRight" data-wow-delay="400ms">
+                <img src="img/counter-img.png" alt="img">
+            </div>
+        </div>
+        <!-- Row-2 End -->
+        <div class="row no-gutters row-2 num_counter">
+            <div class="col-lg-4 col-md-12 col-sm-12 wow fadeInLeft" data-wow-delay="300ms">
+                <div class="media counter">
+                    <i class="fas fa-map-pin mr-4 mt-3"></i>
+                    <div class="media-body">
+                        <h5 class="timer count-number subheading" data-to="125" data-speed="1500">500</h5>
+                        <p class="text">Worldwide Locations</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 wow fadeInDown" data-wow-delay="300ms">
+                <div class="media counter">
+                    <i class="fas fa-list-ul mr-4 mt-3"></i>
+                    <div class="media-body">
+                        <h5 class="timer count-number subheading" data-to="125" data-speed="1500">10740</h5>
+                        <p class="text">Online Bookings</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 wow fadeInRight" data-wow-delay="300ms">
+                <div class="media counter">
+                    <i class="fas fa-check mr-4 mt-3"></i>
+                    <div class="media-body">
+                        <h5 class="timer count-number subheading" data-to="125" data-speed="1500">200</h5>
+                        <p class="text">Beaches & Resorts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container End -->
+</section>
+<!-- Counter Section End -->
+<!-- Testimonial Section Start -->
+<section class="testimonial-section" id="testimonials">
+    <div class="bg-overlay"></div>
+    <div class=" text-center testimonial-carousel owl-carousel owl-themes active">
+        <div class="item customer-container">
+            <div class="row no-gutters customer-img-overlay">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="carousel-text text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere nisi est, sed ullamcorper nibh volutpat at. In rutrum, metus ut posuere gravida, tellus lacus faucibus lectus, sed cursus eros ligula non odio. Suspendisse volutpat sagittis sapien. Curabitur quis malesuada ipsum.</p>
+                </div>
+            </div>
+            <div class="customer-img">
+                <img src="img/customer-1.png" alt="customer-img">
+            </div>
+            <div class="customer-detail">
+                <h5 class="subheading">Ellizabeth Taylor</h5>
+                <p class="text">Amazon</p>
+                <div class="customer-social-icons">
+                    <ul>
+                        <li><a href="#." class="facebook-hover"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#." class="twitter-hover"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#." class="linked-in-hover"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="item customer-container">
+            <div class="row no-gutters customer-img-overlay">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="carousel-text text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere nisi est, sed ullamcorper nibh volutpat at. In rutrum, metus ut posuere gravida, tellus lacus faucibus lectus, sed cursus eros ligula non odio. Suspendisse volutpat sagittis sapien. Curabitur quis malesuada ipsum.</p>
+                </div>
+            </div>
+            <div class="customer-img ">
+                <img src="img/customer-2.png" alt="customer-img">
+            </div>
+            <div class="customer-detail">
+                <h5 class="subheading">Ellizabeth Taylor</h5>
+                <p class="text">Amazon</p>
+                <div class="customer-social-icons ">
+                    <ul>
+                        <li><a href="#." class="facebook-hover"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#." class="twitter-hover"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#." class="linked-in-hover"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="item customer-container">
+            <div class="row no-gutters customer-img-overlay">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="carousel-text text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere nisi est, sed ullamcorper nibh volutpat at. In rutrum, metus ut posuere gravida, tellus lacus faucibus lectus, sed cursus eros ligula non odio. Suspendisse volutpat sagittis sapien. Curabitur quis malesuada ipsum.</p>
+                </div>
+            </div>
+            <div class="customer-img ">
+                <img src="img/customer-3.png" alt="customer-img">
+            </div>
+            <div class="customer-detail">
+                <h5 class="subheading">Ellizabeth Taylor</h5>
+                <p class="text">Amazon</p>
+                <div class="customer-social-icons ">
+                    <ul>
+                        <li><a href="#." class="facebook-hover"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#." class="twitter-hover"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#." class="linked-in-hover"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonial section End -->
