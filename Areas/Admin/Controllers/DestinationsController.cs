@@ -31,6 +31,16 @@ namespace TravelTask.Areas.Admin.Controllers
             pmodel.Page = page;
             pmodel.PageSize = per_page;
             pmodel.PageCount = (int)Math.Ceiling((decimal)await _dbContext.Destinations.CountAsync() / per_page);
+
+            var routevaldic = new RouteValueDictionary();
+
+            routevaldic["page"] = page + 1;
+            routevaldic["per_page"] = per_page;
+
+            pmodel.Next = Url.Action(nameof(PaginatedIndex), routevaldic);
+            routevaldic["page"] = page - 1;
+            pmodel.Prev = Url.Action(nameof(PaginatedIndex), routevaldic);
+
             pmodel.Data  = await _dbContext.Destinations
                 .Skip((page-1)*per_page)
                 .Take(per_page)
@@ -57,6 +67,15 @@ namespace TravelTask.Areas.Admin.Controllers
             var per_page = 3;
 
             var pmodel = new PagedEntityModel<List<DestinationsItemViewModel>>();
+            var routevaldic = new RouteValueDictionary();
+
+            routevaldic["page"] = page + 1;
+            routevaldic["per_page"] = per_page;
+
+            pmodel.Next = Url.Action(nameof(PaginatedIndex), routevaldic);
+            routevaldic["page"] = page - 1;
+            pmodel.Prev = Url.Action(nameof(PaginatedIndex), routevaldic);
+
             pmodel.Page = page;
             pmodel.PageSize = per_page;
             pmodel.PageCount =(int) Math.Ceiling((decimal)await _dbContext.Destinations.CountAsync()/per_page);
